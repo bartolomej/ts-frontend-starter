@@ -8,11 +8,16 @@ module.exports = {
   mode: 'development',
   entry: {
     'bundle.js': [
-      path.resolve(__dirname, './src/index.js')
+      path.resolve(__dirname, './src/index.ts')
     ]
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /.js$/,
         use: 'babel-loader'
@@ -22,6 +27,9 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
   },
   plugins: [
     new CleanWebpackPlugin(),
